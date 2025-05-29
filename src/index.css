@@ -1,0 +1,224 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 142 80% 59%;
+    --primary-foreground: 0 0% 7%;
+
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 142 80% 59%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 142 80% 59%;
+
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    background: radial-gradient(circle at 50% 50%, rgba(36, 36, 36, 1) 0%, rgba(10, 10, 10, 1) 100%);
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(17, 17, 17, 0.8);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(93, 232, 87, 0.5);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(93, 232, 87, 0.8);
+  }
+}
+
+@layer components {
+  .scanner-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanner-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(93, 232, 87, 0.8), transparent);
+    animation: scan-line 2s linear infinite;
+    z-index: 1;
+  }
+
+  .green-glow {
+    box-shadow: 0 0 20px 5px rgba(93, 232, 87, 0.3);
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #ffffff, #5DE857);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(93, 232, 87, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(93, 232, 87, 0.1) 1px, transparent 1px);
+  }
+
+  .glass-panel {
+    background: rgba(17, 17, 17, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(93, 232, 87, 0.2);
+  }
+
+  .card-tilted {
+    transform: perspective(1000px) rotateX(10deg) rotateY(-10deg);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  
+  .card-tilted:hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    box-shadow: 0 10px 30px rgba(93, 232, 87, 0.3);
+  }
+
+  .card-tilted:nth-child(2n) {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+  }
+  
+  .card-tilted:nth-child(2n):hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+
+  .title-font {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+  }
+
+  .highlight-ring {
+    position: relative;
+  }
+
+  .highlight-ring::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    padding: 3px;
+    background: linear-gradient(45deg, rgba(93, 232, 87, 0.6), rgba(93, 232, 87, 0.2), rgba(93, 232, 87, 0.6));
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  /* Marquee animations */
+  .animate-marquee-left {
+    animation: marquee-left 30s linear infinite;
+  }
+  
+  .animate-marquee-right {
+    animation: marquee-right 35s linear infinite;
+  }
+  
+  @keyframes marquee-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @keyframes marquee-right {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0% {
+      opacity: 0.1;
+      transform: scale(0.95);
+    }
+    50% {
+      opacity: 0.2;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 0.1;
+      transform: scale(0.95);
+    }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Kanban board specific styles */
+  .kanban-card {
+    @apply bg-black/30 border border-stella-green/20 rounded-lg p-4 mb-3 cursor-move hover:border-stella-green transition-all duration-300;
+  }
+
+  .kanban-card:hover {
+    @apply shadow-md shadow-stella-green/10;
+  }
+
+  .kanban-column {
+    @apply bg-black/30 rounded-lg p-4;
+  }
+
+  .kanban-column-header {
+    @apply flex items-center gap-2 mb-4;
+  }
+
+  .kanban-icon-container {
+    @apply bg-stella-green/10 p-2 rounded-md;
+  }
+}
